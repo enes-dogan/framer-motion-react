@@ -1,30 +1,34 @@
 import { createContext, useState } from 'react';
+import {
+  ChallengesCtxType,
+  Challenge,
+  childrenProp,
+  Status,
+} from '../types.ts';
 
-export const ChallengesContext = createContext({
-  challenges: [],
-  addChallenge: () => {},
-  updateChallengeStatus: () => {},
-});
+export const ChallengesContext = createContext<ChallengesCtxType | undefined>(
+  undefined
+);
 
-export default function ChallengesContextProvider({ children }) {
-  const [challenges, setChallenges] = useState([]);
+export default function ChallengesContextProvider({ children }: childrenProp) {
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
 
-  function addChallenge(challenge) {
-    setChallenges((prevChallenges) => [
+  function addChallenge(challenge: Challenge) {
+    setChallenges(prevChallenges => [
       { ...challenge, id: Math.random().toString(), status: 'active' },
       ...prevChallenges,
     ]);
   }
 
-  function deleteChallenge(challengeId) {
-    setChallenges((prevChallenges) =>
-      prevChallenges.filter((challenge) => challenge.id !== challengeId)
+  function deleteChallenge(challengeId: string) {
+    setChallenges(prevChallenges =>
+      prevChallenges.filter(challenge => challenge.id !== challengeId)
     );
   }
 
-  function updateChallengeStatus(challengeId, newStatus) {
-    setChallenges((prevChallenges) =>
-      prevChallenges.map((challenge) => {
+  function updateChallengeStatus(challengeId: string, newStatus: Status) {
+    setChallenges(prevChallenges =>
+      prevChallenges.map(challenge => {
         if (challenge.id === challengeId) {
           return { ...challenge, status: newStatus };
         }
@@ -33,7 +37,7 @@ export default function ChallengesContextProvider({ children }) {
     );
   }
 
-  const challengesContext = {
+  const challengesContext: ChallengesCtxType = {
     challenges,
     addChallenge,
     deleteChallenge,

@@ -1,19 +1,20 @@
 import { useContext, useState } from 'react';
+import { ChallengesContext } from '../store/challenges-context.tsx';
+import { ChallengesCtxType, Status } from '../types.ts';
 
-import { ChallengesContext } from '../store/challenges-context.ts';
 import ChallengeItem from './ChallengeItem.tsx';
 import ChallengeTabs from './ChallengeTabs.tsx';
 
 export default function Challenges() {
-  const { challenges } = useContext(ChallengesContext);
+  const { challenges } = useContext(ChallengesContext) as ChallengesCtxType;
   const [selectedType, setSelectedType] = useState('active');
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
 
-  function handleSelectType(newType) {
+  function handleSelectType(newType: Status) {
     setSelectedType(newType);
   }
 
-  function handleViewDetails(id) {
+  function handleViewDetails(id: string) {
     setExpanded(prevId => {
       if (prevId === id) {
         return null;
@@ -29,7 +30,7 @@ export default function Challenges() {
     failed: challenges.filter(challenge => challenge.status === 'failed'),
   };
 
-  const displayedChallenges = filteredChallenges[selectedType];
+  const displayedChallenges = filteredChallenges[selectedType as Status];
 
   return (
     <div id="challenges">
@@ -44,7 +45,7 @@ export default function Challenges() {
               <ChallengeItem
                 key={challenge.id}
                 challenge={challenge}
-                onViewDetails={() => handleViewDetails(challenge.id)}
+                onViewDetails={() => handleViewDetails(challenge.id!)}
                 isExpanded={expanded === challenge.id}
               />
             ))}

@@ -1,28 +1,29 @@
 import { useContext, useRef, useState } from 'react';
+import { NewChallengeProps, imageType, ChallengesCtxType } from '../types.ts';
 
-import { ChallengesContext } from '../store/challenges-context.ts';
+import { ChallengesContext } from '../store/challenges-context.tsx';
 import Modal from './Modal.tsx';
 import images from '../assets/images.ts';
 
-export default function NewChallenge({ onDone }) {
-  const title = useRef();
-  const description = useRef();
-  const deadline = useRef();
+export default function NewChallenge({ onDone }: NewChallengeProps) {
+  const title = useRef<HTMLInputElement>(null);
+  const description = useRef<HTMLTextAreaElement>(null);
+  const deadline = useRef<HTMLInputElement>(null);
 
-  const [selectedImage, setSelectedImage] = useState(null);
-  const { addChallenge } = useContext(ChallengesContext);
+  const [selectedImage, setSelectedImage] = useState<imageType>();
+  const { addChallenge } = useContext(ChallengesContext) as ChallengesCtxType;
 
-  function handleSelectImage(image) {
+  function handleSelectImage(image: imageType) {
     setSelectedImage(image);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const challenge = {
-      title: title.current.value,
-      description: description.current.value,
-      deadline: deadline.current.value,
-      image: selectedImage,
+      title: title.current!.value,
+      description: description.current!.value,
+      deadline: deadline.current!.value,
+      image: selectedImage!,
     };
 
     if (

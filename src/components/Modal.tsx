@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
+import { ModalProps } from '../types.ts';
 
-export default function Modal({ title, children, onClose }) {
+export default function Modal({ title, children, onClose }: ModalProps) {
   return createPortal(
     <>
       <div className="backdrop" onClick={onClose} />
@@ -9,6 +10,6 @@ export default function Modal({ title, children, onClose }) {
         {children}
       </dialog>
     </>,
-    document.getElementById('modal')
+    document.getElementById('modal')!
   );
 }

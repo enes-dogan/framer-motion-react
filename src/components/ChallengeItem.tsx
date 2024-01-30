@@ -1,13 +1,13 @@
 import { useContext } from 'react';
+import { ChallengesContext } from '../store/challenges-context.tsx';
+import { ChallengeItemProps, ChallengesCtxType } from '../types.ts';
 
-import { ChallengesContext } from '../store/challenges-context.ts';
+export default function ChallengeItem(props: ChallengeItemProps) {
+  const { challenge, onViewDetails, isExpanded } = props;
 
-export default function ChallengeItem({
-  challenge,
-  onViewDetails,
-  isExpanded,
-}) {
-  const { updateChallengeStatus } = useContext(ChallengesContext);
+  const { updateChallengeStatus } = useContext(
+    ChallengesContext
+  ) as ChallengesCtxType;
 
   const formattedDate = new Date(challenge.deadline).toLocaleDateString(
     'en-US',
@@ -19,11 +19,11 @@ export default function ChallengeItem({
   );
 
   function handleCancel() {
-    updateChallengeStatus(challenge.id, 'failed');
+    updateChallengeStatus(challenge.id!, 'failed');
   }
 
   function handleComplete() {
-    updateChallengeStatus(challenge.id, 'completed');
+    updateChallengeStatus(challenge.id!, 'completed');
   }
 
   return (

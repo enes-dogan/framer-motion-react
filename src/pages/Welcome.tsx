@@ -60,7 +60,6 @@ export default function WelcomePage() {
             challenge here. It&apos;s been a transformative experience!” - Alex
             P.
           </p>
-          {/* You can add more testimonials or even a carousel for multiple testimonials */}
         </section>
       </main>
     </>

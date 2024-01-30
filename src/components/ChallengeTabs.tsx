@@ -1,6 +1,8 @@
+import { TabProps, ChallengeTabsProps } from '../types.ts';
+
 import Badge from './Badge.tsx';
 
-function Tab({ isSelected, onSelect, badgeCaption, children }) {
+function Tab({ isSelected, onSelect, badgeCaption, children }: TabProps) {
   return (
     <li>
       <button
@@ -15,12 +17,9 @@ function Tab({ isSelected, onSelect, badgeCaption, children }) {
   );
 }
 
-export default function ChallengeTabs({
-  selectedType,
-  onSelectType,
-  challenges,
-  children,
-}) {
+export default function ChallengeTabs(props: ChallengeTabsProps) {
+  const { selectedType, onSelectType, challenges, children } = props;
+
   return (
     <>
       <menu id="tabs">
