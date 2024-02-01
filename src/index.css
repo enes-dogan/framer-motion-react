@@ -130,6 +130,11 @@ main {
   color: #414956;
   font-size: 0.8rem;
   font-family: 'Quicksand', sans-serif;
+  resize: vertical;
+}
+
+#new-challenge #deadline {
+  resize: none;
 }
 
 #new-challenge-images {
@@ -280,6 +285,7 @@ main {
   display: inline-block;
   font-size: 0.85rem;
   margin-left: 0.25rem;
+  transition: 250ms ease-out;
 }
 
 .challenge-item-details.expanded .challenge-item-details-icon {

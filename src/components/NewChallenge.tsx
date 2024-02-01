@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from 'react';
+import { ChallengesContext } from '../store/challenges-context.tsx';
 import { NewChallengeProps, imageType, ChallengesCtxType } from '../types.ts';
 
-import { ChallengesContext } from '../store/challenges-context.tsx';
 import Modal from './Modal.tsx';
 import images from '../assets/images.ts';
 
