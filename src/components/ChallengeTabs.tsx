@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { TabProps, ChallengeTabsProps } from '../types.ts';
 
 import Badge from './Badge.tsx';
@@ -10,9 +11,11 @@ function Tab({ isSelected, onSelect, badgeCaption, children }: TabProps) {
         onClick={onSelect}
       >
         {children}
-        <Badge caption={badgeCaption}></Badge>
+        <Badge key={badgeCaption} caption={badgeCaption}></Badge>
       </button>
-      {isSelected && <div className="active-tab-indicator" />}
+      {isSelected && (
+        <motion.div layoutId="tab-indicator" className="active-tab-indicator" />
+      )}
     </li>
   );
 }
