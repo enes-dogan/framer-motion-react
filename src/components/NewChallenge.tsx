@@ -37,8 +37,8 @@ export default function NewChallenge({ onDone }: NewChallengeProps) {
     ) {
       animate(
         'input, textarea',
-        { x: [-10, 0, 10, 0] },
-        { type: 'spring', duration: 0.2, delay: stagger(0.05) }
+        { x: [-10, 0, 10, 0], backgroundColor: ['#FFCDD2', '#FFF'] },
+        { type: 'spring', duration: 0.5, delay: stagger(0.05) }
       );
       return;
     }
